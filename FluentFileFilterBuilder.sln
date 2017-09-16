@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26730.12
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentFileFilterBuilder", "src\FluentFileFilterBuilder\FluentFileFilterBuilder.csproj", "{27402053-3C91-49F4-868E-71E14CC609FD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentFileFilterBuilder.Tests", "test\FluentFileFilterBuilder.Tests\FluentFileFilterBuilder.Tests.csproj", "{3917FF8D-E892-4949-9682-BB07A8D1AE44}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{27402053-3C91-49F4-868E-71E14CC609FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27402053-3C91-49F4-868E-71E14CC609FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27402053-3C91-49F4-868E-71E14CC609FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27402053-3C91-49F4-868E-71E14CC609FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3917FF8D-E892-4949-9682-BB07A8D1AE44}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3917FF8D-E892-4949-9682-BB07A8D1AE44}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3917FF8D-E892-4949-9682-BB07A8D1AE44}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3917FF8D-E892-4949-9682-BB07A8D1AE44}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AFA634DD-B9DF-4621-9C7B-5EC3000E6351}
+	EndGlobalSection
+EndGlobal

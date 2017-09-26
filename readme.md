@@ -1,11 +1,11 @@
 FluentFileFilterBuilder
 ===================
 
-A lightweight fluent builder that easily creates file filter strings such as those used in [OpenFileDialog](https://docs.microsoft.com/en-us/dotnet/api/system.windows.forms.openfiledialog) and [SaveFileDialog]((https://docs.microsoft.com/en-us/dotnet/api/system.windows.forms.savefiledialog).
+A lightweight fluent builder that easily creates file filter strings such as those used in [OpenFileDialog](https://docs.microsoft.com/en-us/dotnet/api/system.windows.forms.openfiledialog) and [SaveFileDialog](https://docs.microsoft.com/en-us/dotnet/api/system.windows.forms.savefiledialog).
 
 ### Filter strings overview
 
-WinForms file dialogs such as [OpenFileDialog](https://docs.microsoft.com/en-us/dotnet/api/system.windows.forms.openfiledialog) and [SaveFileDialog]((https://docs.microsoft.com/en-us/dotnet/api/system.windows.forms.savefiledialog) use file filter strings to control how they filter files.
+WinForms file dialogs such as [OpenFileDialog](https://docs.microsoft.com/en-us/dotnet/api/system.windows.forms.openfiledialog) and [SaveFileDialog](https://docs.microsoft.com/en-us/dotnet/api/system.windows.forms.savefiledialog) use file filter strings to control how they filter files.
 
 File filter strings are described as follows:
 

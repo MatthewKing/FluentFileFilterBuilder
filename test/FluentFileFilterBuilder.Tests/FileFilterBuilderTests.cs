@@ -13,7 +13,7 @@ namespace FluentFileFilterBuilder.Tests
             FileFilterBuilder builder = new FileFilterBuilder();
             Action act = () => builder.Add(null, "ext");
 
-            act.ShouldThrow<ArgumentNullException>().WithMessage("Value cannot be null.\r\nParameter name: description");
+            act.Should().Throw<ArgumentNullException>();
         }
 
         [Fact]
@@ -22,7 +22,7 @@ namespace FluentFileFilterBuilder.Tests
             FileFilterBuilder builder = new FileFilterBuilder();
             Action act = () => builder.Add(String.Empty, "ext");
 
-            act.ShouldThrow<ArgumentException>().WithMessage("Value cannot be an empty string.\r\nParameter name: description");
+            act.Should().Throw<ArgumentException>();
         }
 
         [Fact]
@@ -31,7 +31,7 @@ namespace FluentFileFilterBuilder.Tests
             FileFilterBuilder builder = new FileFilterBuilder();
             Action act = () => builder.Add("description", null);
 
-            act.ShouldThrow<ArgumentNullException>().WithMessage("Value cannot be null.\r\nParameter name: extensions");
+            act.Should().Throw<ArgumentNullException>();
         }
 
         [Fact]
@@ -40,7 +40,7 @@ namespace FluentFileFilterBuilder.Tests
             FileFilterBuilder builder = new FileFilterBuilder();
             Action act = () => builder.Add("ext", Array.Empty<string>());
 
-            act.ShouldThrow<ArgumentException>().WithMessage("At least one extension must be supplied.\r\nParameter name: extensions");
+            act.Should().Throw<ArgumentException>();
         }
 
         [Theory]
@@ -58,7 +58,7 @@ namespace FluentFileFilterBuilder.Tests
             s.Should().Be(expected);
         }
 
-        private static IEnumerable<object[]> TestCaseData()
+        public static IEnumerable<object[]> TestCaseData()
         {
             // Single filter, single extension.
             yield return new object[]

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.IO;
 using System.Linq;
 
 namespace FluentFileFilterBuilder;
@@ -7,17 +6,17 @@ namespace FluentFileFilterBuilder;
 /// <summary>
 /// Represents a single item in a filter.
 /// </summary>
-internal sealed class FileFilterItem
+public sealed class FileFilterItem
 {
     /// <summary>
-    /// The filter description.
+    /// Gets the filter description.
     /// </summary>
-    private readonly string _description;
+    public string Description { get; }
 
     /// <summary>
-    /// The filter pattern.
+    /// Gets filter pattern.
     /// </summary>
-    private readonly string _pattern;
+    public string Pattern { get; }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="FileFilterItem"/> class.
@@ -31,8 +30,22 @@ internal sealed class FileFilterItem
         if (extensions == null) throw new ArgumentNullException(nameof(extensions));
         if (extensions.Length == 0) throw new ArgumentException("At least one extension must be supplied.", nameof(extensions));
 
-        _description = description;
-        _pattern = String.Join(";", extensions.Select(x => Path.ChangeExtension("*", x)));
+        Description = description;
+        Pattern = String.Join(";", extensions.Select(NormalizeExtension));
+    }
+
+    /// <summary>
+    /// Normalizes the specified extension.
+    /// </summary>
+    /// <param name="extension">The extension to normalize.</param>
+    private static string NormalizeExtension(string extension)
+    {
+        var normalizedExtension = extension.Trim().TrimStart('*', '.');
+        if (string.IsNullOrEmpty(normalizedExtension))
+        {
+            normalizedExtension = "*";
+        }
+        return $"*.{normalizedExtension}";
     }
 
     /// <summary>
@@ -41,6 +54,42 @@ internal sealed class FileFilterItem
     /// <returns>A string representation of the filter item.</returns>
     public override string ToString()
     {
-        return $"{_description} ({_pattern})|{_pattern}";
+        return $"{Description} ({Pattern})|{Pattern}";
+    }
+
+    /// <summary>
+    /// Attempts to parse a file filter item string (for example, "Image files (*.bmp;*.jpg)|*.bmp;*.jpg")
+    /// into a <see cref="FileFilterItem"/> instance.
+    /// </summary>
+    /// <param name="value">The filter item string to parse.</param>
+    /// <param name="item">When this method returns, contains the parsed <see cref="FileFilterItem"/>, if parsing succeeded; otherwise, null.</param>
+    /// <returns>true if the string was successfully parsed; otherwise, false.</returns>
+    public static bool TryParse(string value, out FileFilterItem item)
+    {
+        if (string.IsNullOrWhiteSpace(value))
+        {
+            item = null;
+            return false;
+        }
+
+        var parts = value.Split(['|']);
+        if (parts.Length != 2)
+        {
+            item = null;
+            return false;
+        }
+
+        // Get description, excluding the pattern in parentheses.
+        var descriptionParenthesesIndex = parts[0].IndexOf('(');
+        var description = descriptionParenthesesIndex > 0
+            ? parts[0].Substring(0, descriptionParenthesesIndex).Trim()
+            : parts[0];
+
+        // Get the extensions part, then split on ';' to get individual patterns, and extract the extensions.
+        var extensionsPart = parts[1].Split([';'], StringSplitOptions.RemoveEmptyEntries);
+        var extensions = extensionsPart.Select(x => x.Trim()).ToArray();
+
+        item = new FileFilterItem(description, extensions);
+        return true;
     }
 }

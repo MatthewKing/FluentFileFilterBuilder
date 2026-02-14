@@ -69,4 +69,39 @@ public class FileFilterItemTests
             "All files (*.*)|*.*"
         };
     }
+
+    [Fact]
+    public void TryParse_InvalidFormat_ReturnsFalse()
+    {
+        var input = "Invalid format";
+        var result = FileFilterItem.TryParse(input, out var item);
+        result.Should().BeFalse();
+        item.Should().BeNull();
+    }
+
+    [Fact]
+    public void TryParse_ValidFormat_ReturnsExpectedValues()
+    {
+        var input = "Image files (*.bmp;*.jpg;*.gif)|*.bmp;*.jpg;*.gif";
+
+        var result = FileFilterItem.TryParse(input, out var item);
+
+        result.Should().BeTrue();
+        item.Should().NotBeNull();
+        item.Description.Should().Be("Image files");
+        item.Pattern.Should().Be("*.bmp;*.jpg;*.gif");
+    }
+
+    [Fact]
+    public void TryParse_ValidFormatWithNoParentheses_ReturnsExpectedValues()
+    {
+        var input = "Image files|*.bmp;*.jpg;*.gif";
+
+        var result = FileFilterItem.TryParse(input, out var item);
+
+        result.Should().BeTrue();
+        item.Should().NotBeNull();
+        item.Description.Should().Be("Image files");
+        item.Pattern.Should().Be("*.bmp;*.jpg;*.gif");
+    }
 }

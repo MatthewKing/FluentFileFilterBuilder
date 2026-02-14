@@ -5,7 +5,7 @@
     <Title>FluentFileFilterBuilder</Title>
     <Description>A lightweight fluent builder that easily creates file filter strings such as those used in OpenFileDialog and SaveFileDialog.</Description>
     <Authors>Matthew King</Authors>
-    <Copyright>Copyright 2017-2019 Matthew King.</Copyright>
+    <Copyright>Copyright 2017-2026 Matthew King.</Copyright>
     <PackageProjectUrl>https://github.com/MatthewKing/FluentFileFilterBuilder</PackageProjectUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <VersionPrefix>1.0.1</VersionPrefix>

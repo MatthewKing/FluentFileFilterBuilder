@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="src/FluentFileFilterBuilder/FluentFileFilterBuilder.csproj" />
+  <Project Path="test/FluentFileFilterBuilder.Tests/FluentFileFilterBuilder.Tests.csproj" />
+</Solution>

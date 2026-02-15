@@ -79,17 +79,38 @@ public sealed class FileFilterItem
             return false;
         }
 
+        return TryCreateFromParts(parts[0], parts[1], out item);
+    }
+
+    /// <summary>
+    /// Attempts to create a new <see cref="FileFilterItem"/> from parts.
+    /// </summary>
+    /// <param name="descriptionPart">The description part.</param>
+    /// <param name="extensionsPart">The extensions part.</param>
+    /// <param name="item">When this method returns, contains the created <see cref="FileFilterItem"/>; otherwise, null.</param>
+    /// <returns>true if the item was successfully created; otherwise, false.</returns>
+    internal static bool TryCreateFromParts(string descriptionPart, string extensionsPart, out FileFilterItem item)
+    {
         // Get description, excluding the pattern in parentheses.
-        var descriptionParenthesesIndex = parts[0].IndexOf('(');
+        var descriptionParenthesesIndex = descriptionPart.IndexOf('(');
         var description = descriptionParenthesesIndex > 0
-            ? parts[0].Substring(0, descriptionParenthesesIndex).Trim()
-            : parts[0];
+            ? descriptionPart.Substring(0, descriptionParenthesesIndex).Trim()
+            : descriptionPart;
 
-        // Get the extensions part, then split on ';' to get individual patterns, and extract the extensions.
-        var extensionsPart = parts[1].Split([';'], StringSplitOptions.RemoveEmptyEntries);
-        var extensions = extensionsPart.Select(x => x.Trim()).ToArray();
+        // Get extensions, split on ';' to get individual patterns, and trim.
+        var extensions = extensionsPart.Split([';'], StringSplitOptions.RemoveEmptyEntries)
+            .Select(x => x.Trim())
+            .ToArray();
 
-        item = new FileFilterItem(description, extensions);
-        return true;
+        if (!string.IsNullOrWhiteSpace(description) && extensions.Length > 0)
+        {
+            item = new FileFilterItem(description, extensions);
+            return true;
+        }
+        else
+        {
+            item = default;
+            return false;
+        }
     }
 }

@@ -26,7 +26,7 @@ Here are some example file filter strings:
 The first example filter string described above can be created as so:
 
 ```csharp
-var filter = new FileFilterBuilder()
+var filter = FileFilter.Create()
     .Add("Text files", "txt")
     .Add("All files", "*")
     .ToString();
@@ -35,7 +35,7 @@ var filter = new FileFilterBuilder()
 The second example filter string described above can be created as so:
 
 ```csharp
-var filter = new FileFilterBuilder()
+var filter = FileFilter.Create()
     .Add("Image files", "BMP", "JPG", "GIF")
     .Add("All files", "*")
     .ToString();
